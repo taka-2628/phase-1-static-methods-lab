@@ -1,4 +1,39 @@
-//OPTIMIZED 01
+// OPTIMIZED 02
+class Formatter {
+  static capitalize(string){
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
+
+  static sanitize(string){
+    return string.replace(/[^A-Za-z0-9-' ]+/g, '')
+  }
+
+  static titleize(string){
+    const exception = ["the", "a", "an", "but", "of", "and", "for", "at", "by", "from"];
+    const empArr = []
+    const arr = string.split(" ")
+    for (let i = 0; i < arr.length; i++){
+      if (i === 0){
+        empArr.push(Formatter.capitalize(arr[i]))
+      } else {
+        const test = exception.includes(arr[i])
+        if (!test){
+          empArr.push(Formatter.capitalize(arr[i]))
+        } else {
+          empArr.push(arr[i])
+        }
+      }
+    }
+    return empArr.join(" ")
+  }
+}
+
+console.log(Formatter.capitalize("code"))
+// => Code
+console.log(Formatter.titleize("the code book by simon singh"))
+// => The Code Book by Simon Singh
+
+/* OPTIMIZED 01
 class Formatter {
   static capitalize(string){
     const first = string.charAt(0).toUpperCase()
@@ -39,10 +74,8 @@ class Formatter {
   }
 }
 
-console.log(Formatter.capitalize("code"))
-// => Code
-console.log(Formatter.titleize("the code book by simon singh"))
-// => The Code Book by Simon Singh
+Formatter.titleize("the code book by simon singh")
+*/
 
 /* ORIGINAL SOLUTION
 class Formatter {
